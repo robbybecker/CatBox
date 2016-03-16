@@ -2,13 +2,12 @@
 using System.Collections;
 using BehaviourTreeSpace;
 
-[System.Serializable]
-public class AmIThirsty : BehaviourNode 
+public class NeedAWe : BehaviourNode 
 {
 	public override NodeStatus Tick (TreeEntity entity)
 	{
-		Thirst thirst = entity.GetComponent<Thirst>();
-		if(thirst.DoWeNeedTheNeed())
+		Bladder bladder = entity.GetComponent<Bladder>();
+		if(bladder.DoWeNeedTheNeed())
 		{
 			nodeStatus = NodeStatus.Success;
 		}

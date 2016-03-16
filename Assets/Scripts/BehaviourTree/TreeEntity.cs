@@ -7,31 +7,45 @@ namespace BehaviourTreeSpace
 	public class TreeEntity : MonoBehaviour 
 	{
 		[SerializeField]
-		private BehaviourTree _behaviourTree;	
-		public BehaviourTree behaviourTree {
+		private BehaviourNode _currentNode;
+		public BehaviourNode currentNode {
 			get {
-				return _behaviourTree;
+				return _currentNode;
 			}
 			set {
-				_behaviourTree = value;
+				_previousNode = _currentNode;
+				_currentNode = value;
 			}
 		}
-		public Dictionary<string, object> dataContext = new Dictionary<string, object>();		
-		protected RootSelector root;
+
+		private BehaviourNode _previousNode;
+
+		public Dictionary<string, object> dataContext = new Dictionary<string, object>();
+
+		[SerializeField]
+		protected RootSelector _rootNode;
+		public RootSelector rootNode {
+			get {
+				return _rootNode;
+			}
+			set {
+				_rootNode = value;
+			}
+		}
 
 		void Start()
 		{
 			OnStart();
-			if(root != null)
-				behaviourTree.Setup(root);
+			currentNode = rootNode;
 		}
 		public virtual void OnStart(){}
 
 		void Update()
 		{
 			OnUpdate();
-			if(behaviourTree != null)
-				behaviourTree.Process();
+			NodeStatus nodeStatus = currentNode.Process(this);
+			if(nodeStatus != NodeStatus.Running)
+				rootNode.Process(this);
 		}
 		public virtual void OnUpdate(){}
 	}

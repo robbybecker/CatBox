@@ -12,24 +12,8 @@ namespace BehaviourTreeSpace
 	{
 		public override NodeStatus Tick (TreeEntity tree)
 		{
-	//		NodeStatus returnStatus = NodeStatus.Success;
-	//		while(returnStatus == NodeStatus.Running || returnStatus == NodeStatus.Success)
-	//		{
-	//			returnStatus = _behaviour.Tick(tree);
-	//		}
-	//		return NodeStatus.Success;
-
-			while(_behaviour.Process(tree) != NodeStatus.Failure){}
-
+			while(behaviour.Process(tree) != NodeStatus.Failure){}
 			return NodeStatus.Success;
-
-
-	//		NodeStatus returnStatus = _behaviour.Tick(tree);
-	//		if (returnStatus == NodeStatus.Running || returnStatus == NodeStatus.Success)
-	//		{
-	//
-	//		}
-	//		return returnStatus;
 		}
 	}
 }

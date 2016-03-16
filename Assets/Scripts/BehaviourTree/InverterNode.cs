@@ -12,11 +12,11 @@ namespace BehaviourTreeSpace
 	{
 		public override NodeStatus Tick (TreeEntity tree)
 		{
-			nodeStatus = _behaviour.Process(tree);
+			nodeStatus = behaviour.Process(tree);
 
 			if(nodeStatus == NodeStatus.Failure)
 				nodeStatus = NodeStatus.Success;
-			else if (nodeStatus == NodeStatus.Success)
+			else if(nodeStatus == NodeStatus.Success)
 				nodeStatus = NodeStatus.Failure;	
 
 			return nodeStatus;

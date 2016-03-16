@@ -5,8 +5,8 @@ using BehaviourTreeSpace;
 [System.Serializable]
 public class MoveToLocation : BehaviourNode 
 {
+	private Movement movement;
 	private Vector3 walkLocation;
-	public Movement movement;
 	
 	public override void OnEnterNode (TreeEntity entity)
 	{

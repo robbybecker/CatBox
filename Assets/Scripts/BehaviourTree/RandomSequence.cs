@@ -5,7 +5,7 @@ namespace BehaviourTreeSpace
 {
 	[System.Serializable]
 	/// <summary>
-	/// Sequence node - runs a sequence of child nodes
+	/// Sequence node - runs a sequence of child nodes in random order
 	/// </summary>
 	public class RandomSequence : SequenceNode 
 	{

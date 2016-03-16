@@ -15,21 +15,13 @@ namespace BehaviourTreeSpace
 
 		public RepeaterNode(int maxCount, BehaviourNode behaviour)
 		{
-			_behaviour = behaviour;
+			behaviour = behaviour;
 			_maxCount = maxCount;
 		}
 
 		public override NodeStatus Tick (TreeEntity tree)
 		{
-	//		NodeStatus returnStatus = NodeStatus.Failure;
-	//		for(int i = 0; i < repeatAttempts; i++)
-	//		{
-	//			returnStatus = _behaviour.Tick(tree);
-	//		}
-	////		repeatCount++;
-	//		return returnStatus;
-
-			nodeStatus = _behaviour.Process(tree);
+			nodeStatus = behaviour.Process(tree);
 			if(nodeStatus == NodeStatus.Failure)
 				return nodeStatus;
 			if (_counter < _maxCount)

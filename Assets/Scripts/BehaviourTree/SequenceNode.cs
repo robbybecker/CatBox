@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 namespace BehaviourTreeSpace
@@ -9,11 +9,6 @@ namespace BehaviourTreeSpace
 	/// </summary>
 	public class SequenceNode : CompositeNode 
 	{
-		public SequenceNode(params BehaviourNode[] behaviours)
-		{
-			_behaviours = behaviours;
-		}
-
 		public override NodeStatus Tick(TreeEntity tree)
 		{
 			for(int i = 0; i < _behaviours.Length; i++)

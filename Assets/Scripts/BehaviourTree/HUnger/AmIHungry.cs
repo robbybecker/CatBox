@@ -8,7 +8,7 @@ public class AmIHungry : BehaviourNode
 	public override NodeStatus Tick (TreeEntity entity)
 	{
 		Hunger hunger = entity.GetComponent<Hunger>();
-		if(hunger.hungerState == HungerState.Hungry || hunger.hungerState == HungerState.Starving)
+		if(hunger.DoWeNeedTheNeed())
 		{
 			nodeStatus = NodeStatus.Success;
 		}

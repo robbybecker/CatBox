@@ -1,18 +1,31 @@
 ﻿using UnityEngine;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 
 namespace BehaviourTreeSpace
 {
-	[Serializable]
+	[System.Serializable]
 	public class CompositeNode : BehaviourNode 
 	{
+		[SerializeField]
 		protected BehaviourNode[] _behaviours;
+		public BehaviourNode[] behaviours {
+			get {
+				return _behaviours;
+			}
+			set {
+				_behaviours = value;
+			}
+		}
 
-		public CompositeNode(params BehaviourNode[] behaviours)
+		[ContextMenu("Set Children")]
+		public void SetChildren()
 		{
-			_behaviours = behaviours;
+			behaviours = new BehaviourNode[transform.childCount];
+			for(int i = 0; i < transform.childCount; i++)
+			{
+				behaviours[i] = transform.GetChild(i).GetComponent<BehaviourNode>();
+			}
 		}
 	}
 }

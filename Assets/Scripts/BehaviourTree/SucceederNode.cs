@@ -9,11 +9,11 @@ namespace BehaviourTreeSpace
 	[System.Serializable]
 	public class SucceederNode : DecoratorNode 
 	{
-		public override NodeStatus Tick(TreeEntity tree)
+		public override NodeStatus Tick(TreeEntity entity)
 		{
+			behaviour.Process(entity);		
 			nodeStatus = NodeStatus.Success;
-			_behaviour.Process(tree);		
-			return NodeStatus.Success; // return the success
+			return nodeStatus; // return the success
 		}
 	}
 }
