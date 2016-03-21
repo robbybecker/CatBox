@@ -10,10 +10,18 @@ namespace BehaviourTreeSpace
 	/// </summary>
 	public class RepeatUntilFailNode : DecoratorNode 
 	{
-		public override NodeStatus Tick (TreeEntity tree)
+		public override NodeStatus Tick (TreeEntity entity)
 		{
-			while(behaviour.Process(tree) != NodeStatus.Failure){}
-			return NodeStatus.Success;
+			do
+			{
+				nodeStatus = Tick(entity);
+				if(nodeStatus != NodeStatus.Success && nodeStatus != NodeStatus.Failure)
+					return nodeStatus;
+			}
+			while(nodeStatus != NodeStatus.Failure);
+
+			nodeStatus = NodeStatus.Success;
+			return nodeStatus;
 		}
 	}
 }

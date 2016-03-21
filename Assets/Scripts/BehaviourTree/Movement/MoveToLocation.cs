@@ -4,19 +4,10 @@ using BehaviourTreeSpace;
 
 [System.Serializable]
 public class MoveToLocation : BehaviourNode 
-{
-	private Movement movement;
-	private Vector3 walkLocation;
-	
+{	
 	public override void OnEnterNode (TreeEntity entity)
 	{
-		object outObject;
-		movement = entity.GetComponent<Movement>();
-		if(entity.dataContext.TryGetValue("moveToLocation", out outObject))
-		{
-			walkLocation = (Vector3)outObject;
-		}
-		else
+		if(entity.dataContextVector.ContainsKey("moveToLocation") == false)
 		{
 			nodeStatus = NodeStatus.Failure;			
 		}
@@ -24,11 +15,13 @@ public class MoveToLocation : BehaviourNode
 	
 	public override NodeStatus Tick (TreeEntity entity)
 	{
+		Vector3 walkLocation = entity.dataContextVector["moveToLocation"];
+		Movement movement = entity.GetComponent<Movement>();
 		movement.Move(walkLocation);
 		if(Vector3.Distance(entity.transform.position, walkLocation) <= movement.stoppingDistance)
 		{
 			nodeStatus = NodeStatus.Success;
-			entity.dataContext.Remove("moveToLocation");
+			entity.dataContextVector.Remove("moveToLocation");
 		}
 		else
 		{

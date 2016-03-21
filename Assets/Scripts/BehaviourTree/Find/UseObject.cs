@@ -4,7 +4,6 @@ using BehaviourTreeSpace;
 
 public class UseObject : BehaviourNode
 {
-	private IUseable iUseable;
 	public string objectToUse;
 	
 	public override void OnEnterNode (TreeEntity entity)
@@ -14,27 +13,21 @@ public class UseObject : BehaviourNode
 			nodeStatus = NodeStatus.Failure;
 			return;
 		}
-		object outObject;
-		if(entity.dataContext.TryGetValue(objectToUse, out outObject) == false)
+		if(entity.dataContextGameObject.ContainsKey(objectToUse) == false)
 		{
 			nodeStatus = NodeStatus.Failure;
-			return;
-		}
-		if(outObject == null)
-		{
-			nodeStatus = NodeStatus.Failure;			
-			return;
-		}
-		iUseable = ((GameObject)outObject).GetComponent<IUseable>();
-		if(iUseable == null)
-		{		
-			nodeStatus = NodeStatus.Failure;			
 			return;
 		}
 	}
 	
 	public override NodeStatus Tick (TreeEntity entity)
 	{
+		IUseable iUseable = entity.dataContextGameObject[objectToUse].GetComponent<IUseable>();
+		if(iUseable == null)
+		{		
+			nodeStatus = NodeStatus.Failure;			
+			return nodeStatus;
+		}
 		if(iUseable.IsObjectUsable() == false)
 		{
 			nodeStatus = NodeStatus.Failure;			

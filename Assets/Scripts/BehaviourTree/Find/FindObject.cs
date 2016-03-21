@@ -33,27 +33,26 @@ public class FindObject : BehaviourNode
 				distance = newDistance;
 			}
 		}
-		
-		object objectPoint;
-		if(entity.dataContext == null)
-			entity.dataContext = new System.Collections.Generic.Dictionary<string, object>();
-		if(entity.dataContext.TryGetValue("moveToLocation", out objectPoint))
+
+		if(entity.dataContextVector == null)
+			entity.dataContextVector = new System.Collections.Generic.Dictionary<string, Vector3>();
+
+		if(entity.dataContextVector.ContainsKey("moveToLocation"))
 		{
-			entity.dataContext["moveToLocation"] = closestObject.transform.position;
+			entity.dataContextVector["moveToLocation"] = closestObject.transform.position;
 		}
 		else
 		{
-			entity.dataContext.Add("moveToLocation", closestObject.transform.position);				
+			entity.dataContextVector.Add("moveToLocation", closestObject.transform.position);				
 		}
-		
-		object theObject;
-		if(entity.dataContext.TryGetValue(objectToFind, out theObject))
+
+		if(entity.dataContextGameObject.ContainsKey(objectToFind))
 		{
-			entity.dataContext[objectToFind] = closestObject;
+			entity.dataContextGameObject[objectToFind] = closestObject;
 		}
 		else
 		{
-			entity.dataContext.Add(objectToFind, closestObject);				
+			entity.dataContextGameObject.Add(objectToFind, closestObject);				
 		}
 		nodeStatus = NodeStatus.Success;
 		return nodeStatus;

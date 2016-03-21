@@ -20,7 +20,8 @@ namespace BehaviourTreeSpace
 
 		private BehaviourNode _previousNode;
 
-		public Dictionary<string, object> dataContext = new Dictionary<string, object>();
+		public Dictionary<string, Vector3> dataContextVector = new Dictionary<string, Vector3>();
+		public Dictionary<string, GameObject> dataContextGameObject = new Dictionary<string, GameObject>();
 
 		[SerializeField]
 		protected RootSelector _rootNode;

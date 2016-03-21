@@ -10,30 +10,25 @@ namespace BehaviourTreeSpace
 	/// </summary>
 	public class RepeaterNode : DecoratorNode
 	{
-		private int _maxCount = 2; // set a repeat amount
+		public int maxCount = 2; // set a repeat amount
 		private int _counter = 0;
 
-		public RepeaterNode(int maxCount, BehaviourNode behaviour)
+		public override void OnEnterNode (TreeEntity entity)
 		{
-			behaviour = behaviour;
-			_maxCount = maxCount;
+			_counter = 0;
 		}
 
 		public override NodeStatus Tick (TreeEntity tree)
 		{
-			nodeStatus = behaviour.Process(tree);
-			if(nodeStatus == NodeStatus.Failure)
-				return nodeStatus;
-			if (_counter < _maxCount)
+			while(_counter < maxCount)
 			{
+				nodeStatus = behaviour.Process(tree);
+				if(nodeStatus != NodeStatus.Success && nodeStatus != NodeStatus.Failure)
+					return nodeStatus;
+
 				_counter++;
-				nodeStatus = NodeStatus.Running;
 			}
-			else
-			{
-				_counter = 0;
-				nodeStatus = NodeStatus.Success;
-			}
+			nodeStatus = NodeStatus.Success;
 			return nodeStatus;
 		}
 	}
