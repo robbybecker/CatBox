@@ -9,11 +9,9 @@ namespace BehaviourTreeSpace
 	/// </summary>
 	public class RandomSelector : SelectorNode
 	{		
-		public override NodeStatus Tick(TreeEntity tree)
+		public override void OnEnterNode (TreeEntity entity)
 		{
-			if(nodeStatus != NodeStatus.Running)
-				_behaviours.Shuffle();
-			return base.Tick(tree);
+			_behaviours.Shuffle();
 		}
 	}
 }

@@ -117,6 +117,7 @@ public class Need : MonoBehaviour
 	public bool AddNeed()
 	{
 		needLevel = Mathf.Clamp(needLevel + 1, 0, maxNeedLevel);	
+		OnAddNeed();
 		if(needState == NeedState.Good || needState == NeedState.Great)
 		{
 			return true;
@@ -125,17 +126,6 @@ public class Need : MonoBehaviour
 		{
 			return false;
 		}
-//		return OnAddNeed();
 	}
-//	protected virtual bool OnAddNeed()
-//	{
-//		if(needState == NeedState.Good || needState == NeedState.Great)
-//		{
-//			return true;
-//		}
-//		else
-//		{
-//			return false;
-//		}
-//	}
+	protected virtual void OnAddNeed(){}
 }

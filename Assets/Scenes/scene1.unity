@@ -213,7 +213,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nodeName: ThirstSequence
-  _nodeStatus: 0
   _behaviours:
   - {fileID: 1157108345}
   - {fileID: 680081730}
@@ -293,7 +292,7 @@ Transform:
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 6
 --- !u!1 &273507827
 GameObject:
   m_ObjectHideFlags: 0
@@ -338,7 +337,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nodeName: BladderSequence
-  _nodeStatus: 0
   _behaviours:
   - {fileID: 333171484}
   - {fileID: 2070747705}
@@ -384,7 +382,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nodeName: NeedAWe
-  _nodeStatus: 0
 --- !u!1 &373776418
 GameObject:
   m_ObjectHideFlags: 0
@@ -425,7 +422,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nodeName: MoveToLocation
-  _nodeStatus: 0
 --- !u!1 &411339546
 GameObject:
   m_ObjectHideFlags: 0
@@ -454,7 +450,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nodeName: IsCatLitterDirty
-  _nodeStatus: 0
 --- !u!4 &411339548
 Transform:
   m_ObjectHideFlags: 0
@@ -507,7 +502,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nodeName: DrinkTheDrink
-  _nodeStatus: 0
   objectToUse: Drink
 --- !u!1 &598608887
 GameObject:
@@ -549,7 +543,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nodeName: MoveToLitter
-  _nodeStatus: 0
 --- !u!1 &601606355
 GameObject:
   m_ObjectHideFlags: 0
@@ -591,7 +584,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nodeName: IsCatLitterCleanInverter
-  _nodeStatus: 0
   _behaviour: {fileID: 411339547}
 --- !u!1 &680081728
 GameObject:
@@ -633,7 +625,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nodeName: FindDrink
-  _nodeStatus: 0
   objectToFind: Drink
 --- !u!1 &685925082
 GameObject:
@@ -675,7 +666,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nodeName: MoveToLocation
-  _nodeStatus: 0
 --- !u!1 &921501851
 GameObject:
   m_ObjectHideFlags: 0
@@ -719,7 +709,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nodeName: RandomSelector
-  _nodeStatus: 0
   _behaviours:
   - {fileID: 1396255717}
   - {fileID: 243855688}
@@ -764,7 +753,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nodeName: UseCatLitter
-  _nodeStatus: 0
   objectToUse: CatLitter
 --- !u!1001 &1070137874
 Prefab:
@@ -848,7 +836,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nodeName: AmIThirsty
-  _nodeStatus: 0
 --- !u!1 &1177836800
 GameObject:
   m_ObjectHideFlags: 0
@@ -908,7 +895,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
 --- !u!1 &1396255715
 GameObject:
   m_ObjectHideFlags: 0
@@ -953,7 +940,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nodeName: HungerSequence
-  _nodeStatus: 0
   _behaviours:
   - {fileID: 1478167488}
   - {fileID: 2141641962}
@@ -999,7 +985,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nodeName: AmIHungry
-  _nodeStatus: 0
 --- !u!1 &1509613221
 GameObject:
   m_ObjectHideFlags: 0
@@ -1042,7 +1027,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nodeName: CheckCatLitterSequence
-  _nodeStatus: 0
   _behaviours:
   - {fileID: 601606357}
   - {fileID: 954240976}
@@ -1086,7 +1070,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nodeName: EatFood
-  _nodeStatus: 0
   objectToUse: Food
 --- !u!1001 &1951971027
 Prefab:
@@ -1173,6 +1156,10 @@ Prefab:
       propertyPath: _rootNode
       value: 
       objectReference: {fileID: 2011498645}
+    - target: {fileID: 11495510, guid: cb7d12a222ee78c41990c64718c5fc0a, type: 2}
+      propertyPath: initialNeedLevel
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cb7d12a222ee78c41990c64718c5fc0a, type: 2}
   m_IsPrefabParent: 0
@@ -1217,7 +1204,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nodeName: RootSelector
-  _nodeStatus: 0
   _behaviours:
   - {fileID: 921501853}
 --- !u!1001 &2038653304
@@ -1302,7 +1288,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nodeName: FindCatLitter
-  _nodeStatus: 0
   objectToFind: CatLitter
 --- !u!1 &2141641960
 GameObject:
@@ -1344,5 +1329,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nodeName: FindFood
-  _nodeStatus: 0
   objectToFind: Food

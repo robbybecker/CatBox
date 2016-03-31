@@ -9,11 +9,12 @@ namespace BehaviourTreeSpace
 	/// </summary>
 	public class SequenceNode : CompositeNode 
 	{
-		public override NodeStatus Tick(TreeEntity tree)
+		public override NodeStatus OnTick(TreeEntity entity)
 		{
+			NodeStatus nodeStatus = NodeStatus.Running;
 			for(int i = 0; i < _behaviours.Length; i++)
 			{
-				nodeStatus = _behaviours[i].Process(tree);
+				nodeStatus = _behaviours[i].Process(entity);
 				if(nodeStatus == NodeStatus.Failure)
 					return nodeStatus;
 				else if(nodeStatus == NodeStatus.Success)

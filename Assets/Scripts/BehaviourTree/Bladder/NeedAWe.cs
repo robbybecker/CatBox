@@ -4,17 +4,16 @@ using BehaviourTreeSpace;
 
 public class NeedAWe : BehaviourNode 
 {
-	public override NodeStatus Tick (TreeEntity entity)
+	public override NodeStatus OnTick (TreeEntity entity)
 	{
 		Bladder bladder = entity.GetComponent<Bladder>();
 		if(bladder.DoWeNeedTheNeed())
 		{
-			nodeStatus = NodeStatus.Success;
+			return NodeStatus.Success;
 		}
 		else
 		{
-			nodeStatus = NodeStatus.Failure;
+			return NodeStatus.Failure;
 		}	
-		return nodeStatus;
 	}
 }

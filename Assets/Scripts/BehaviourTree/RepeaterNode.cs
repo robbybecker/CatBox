@@ -18,18 +18,17 @@ namespace BehaviourTreeSpace
 			_counter = 0;
 		}
 
-		public override NodeStatus Tick (TreeEntity tree)
+		public override NodeStatus OnTick (TreeEntity entity)
 		{
 			while(_counter < maxCount)
 			{
-				nodeStatus = behaviour.Process(tree);
+				NodeStatus nodeStatus = behaviour.Process(entity);
 				if(nodeStatus != NodeStatus.Success && nodeStatus != NodeStatus.Failure)
 					return nodeStatus;
 
 				_counter++;
 			}
-			nodeStatus = NodeStatus.Success;
-			return nodeStatus;
+			return NodeStatus.Success;;
 		}
 	}
 }

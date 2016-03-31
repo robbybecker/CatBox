@@ -6,38 +6,29 @@ public class UseObject : BehaviourNode
 {
 	public string objectToUse;
 	
-	public override void OnEnterNode (TreeEntity entity)
+	public override NodeStatus OnTick (TreeEntity entity)
 	{
 		if(objectToUse.Length == null)
 		{
-			nodeStatus = NodeStatus.Failure;
-			return;
+			return NodeStatus.Failure;
 		}
 		if(entity.dataContextGameObject.ContainsKey(objectToUse) == false)
 		{
-			nodeStatus = NodeStatus.Failure;
-			return;
+			return NodeStatus.Failure;
 		}
-	}
-	
-	public override NodeStatus Tick (TreeEntity entity)
-	{
 		IUseable iUseable = entity.dataContextGameObject[objectToUse].GetComponent<IUseable>();
 		if(iUseable == null)
 		{		
-			nodeStatus = NodeStatus.Failure;			
-			return nodeStatus;
+			return NodeStatus.Failure;			
 		}
 		if(iUseable.IsObjectUsable() == false)
 		{
-			nodeStatus = NodeStatus.Failure;			
-			return nodeStatus;
+			return NodeStatus.Failure;			
 		}
-		nodeStatus = NodeStatus.Running;			
 		if(iUseable.UseObject(entity)) // if true we are are good with that need
 		{
-			nodeStatus = NodeStatus.Success;
+			return NodeStatus.Success;
 		}
-		return nodeStatus;
+		return NodeStatus.Running;
 	}
 }

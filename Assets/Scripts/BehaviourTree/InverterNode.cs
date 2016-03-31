@@ -10,9 +10,9 @@ namespace BehaviourTreeSpace
 	/// </summary>
 	public class InverterNode : DecoratorNode 
 	{
-		public override NodeStatus Tick (TreeEntity tree)
+		public override NodeStatus OnTick (TreeEntity entity)
 		{
-			nodeStatus = behaviour.Process(tree);
+			NodeStatus nodeStatus = behaviour.Process(entity);
 
 			if(nodeStatus == NodeStatus.Failure)
 				nodeStatus = NodeStatus.Success;

@@ -7,19 +7,17 @@ public class FindObject : BehaviourNode
 {
 	public string objectToFind = "";
 
-	public override NodeStatus Tick (TreeEntity entity)
+	public override NodeStatus OnTick (TreeEntity entity)
 	{
 		if(objectToFind.Length == 0)
 		{
-			nodeStatus = NodeStatus.Failure;
-			return nodeStatus;
+			return NodeStatus.Failure;
 		}
 		// find object and check if it is useable
 		GameObject[] objects = GameObject.FindGameObjectsWithTag(objectToFind).Where(go => go.GetComponent<IUseable>().IsObjectUsable()).ToArray();
 		if(objects.Length == 0)
 		{
-			nodeStatus = NodeStatus.Failure;
-			return nodeStatus;;
+			return NodeStatus.Failure;
 		}
 		GameObject closestObject = null;
 		closestObject = objects[0];			
@@ -54,7 +52,6 @@ public class FindObject : BehaviourNode
 		{
 			entity.dataContextGameObject.Add(objectToFind, closestObject);				
 		}
-		nodeStatus = NodeStatus.Success;
-		return nodeStatus;
+		return NodeStatus.Success;
 	}
 }

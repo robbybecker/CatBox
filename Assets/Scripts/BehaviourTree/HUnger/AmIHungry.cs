@@ -5,17 +5,16 @@ using BehaviourTreeSpace;
 [System.Serializable]
 public class AmIHungry : BehaviourNode 
 {
-	public override NodeStatus Tick (TreeEntity entity)
+	public override NodeStatus OnTick (TreeEntity entity)
 	{
 		Hunger hunger = entity.GetComponent<Hunger>();
 		if(hunger.DoWeNeedTheNeed())
 		{
-			nodeStatus = NodeStatus.Success;
+			return NodeStatus.Success;
 		}
 		else
 		{
-			nodeStatus = NodeStatus.Failure;
+			return NodeStatus.Failure;
 		}	
-		return nodeStatus;
 	}
 }

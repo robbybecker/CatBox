@@ -7,11 +7,10 @@ namespace BehaviourTreeSpace
 	[Serializable]
 	public class RootSelector : CompositeNode 
 	{	
-		public override NodeStatus Tick (TreeEntity tree)
+		public override NodeStatus OnTick (TreeEntity tree)
 		{
-			NodeStatus returnStatus = NodeStatus.Running;
-			returnStatus = _behaviours[0].Process(tree);
-			return returnStatus;
+			NodeStatus nodeStatus = _behaviours[0].Process(tree);
+			return nodeStatus;
 		}
 	}
 }

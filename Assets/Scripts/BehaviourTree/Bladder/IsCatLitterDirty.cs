@@ -4,22 +4,20 @@ using BehaviourTreeSpace;
 
 public class IsCatLitterDirty : BehaviourNode
 {	
-	public override NodeStatus Tick (TreeEntity entity)
+	public override NodeStatus OnTick (TreeEntity entity)
 	{
 		if(entity.dataContextGameObject.ContainsKey("CatLitter") == false)
-		{
-			nodeStatus = NodeStatus.Failure;			
-			return nodeStatus;
+		{		
+			return NodeStatus.Failure;
 		}
 		CatLitter catLitter = entity.dataContextGameObject["CatLitter"].GetComponent<CatLitter>();
 		if(catLitter.quantity == 0)
 		{
-			nodeStatus = NodeStatus.Success;
+			return NodeStatus.Success;
 		}
 		else
 		{
-			nodeStatus = NodeStatus.Failure;			
+			return NodeStatus.Failure;			
 		}
-		return nodeStatus;
 	}
 }

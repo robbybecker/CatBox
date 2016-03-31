@@ -9,10 +9,10 @@ namespace BehaviourTreeSpace
 	/// </summary>
 	public class RandomSequence : SequenceNode 
 	{
-		public override NodeStatus Tick(TreeEntity tree)
+		public override NodeStatus OnTick(TreeEntity tree)
 		{
 			_behaviours.Shuffle();
-			return base.Tick(tree);
+			return base.OnTick(tree);
 		}
 	}
 }

@@ -6,6 +6,34 @@ using System.Collections.Generic;
 namespace BehaviourTreeSpace
 {
 	[Serializable]
+	public struct BehaviourNodeInfo
+	{
+		public string nodeName;			
+		public NodeStatus nodeStatus;	
+		public bool initialised;
+
+		public BehaviourNodeInfo(string nodeName, NodeStatus nodeStatus, bool initialised)
+		{
+			this.nodeName = nodeName;
+			this.nodeStatus = nodeStatus;
+			this.initialised = initialised;
+		}
+	}
+
+//	[Serializable]
+//	public struct BehaviourNodeInfo
+//	{
+//		public NodeStatus nodeStatus;	
+//		public bool initialised;
+//		
+//		public BehaviourNodeInfo(NodeStatus nodeStatus, bool initialised)
+//		{
+//			this.nodeStatus = nodeStatus;
+//			this.initialised = initialised;
+//		}
+//	}
+
+	[Serializable]
 	public class BehaviourNode : MonoBehaviour
 	{
 		[SerializeField]
@@ -19,22 +47,40 @@ namespace BehaviourTreeSpace
 			}
 		}
 
-		[SerializeField]		
-		private NodeStatus _nodeStatus;
-		public NodeStatus nodeStatus {
+//		[SerializeField]		
+//		private NodeStatus _nodeStatus;
+//		public NodeStatus nodeStatus {
+//			get {
+//				return _nodeStatus;
+//			}
+//			set {
+//				_nodeStatus = value;
+//			}
+//		}
+//
+//		private bool _initialised = false;
+//		public bool initialised {
+//			get {
+//				return _initialised;
+//			}
+//			set {
+//				_initialised = value;
+//			}
+//		}
+
+		private int _uid;
+		public int uid {
 			get {
-				return _nodeStatus;
+				return _uid;
 			}
 			set {
-				_nodeStatus = value;
+				_uid = value;
 			}
 		}
-
-		private bool _initialised = false;
-
+		
 		void Awake()
 		{
-			nodeStatus = NodeStatus.Fresh;
+			uid = GetInstanceID();
 		}
 
 		void OnValidate()
@@ -56,10 +102,8 @@ namespace BehaviourTreeSpace
 		public virtual void EnterNode(TreeEntity entity)
 		{
 			entity.currentNode = this;
-			if(_initialised == false)
+			if(entity.EnterNode(this))
 			{
-				_initialised = true;
-				nodeStatus = NodeStatus.Running;
 				OnEnterNode(entity);
 			}
 		}
@@ -69,15 +113,16 @@ namespace BehaviourTreeSpace
 		public NodeStatus Process(TreeEntity entity)
 		{
 			EnterNode(entity);
+//			if(nodeStatus != NodeStatus.Running)
+//			{
+//				ExitNode(entity);
+//				return entity.nodeStatus;
+//			}
+			NodeStatus nodeStatus = Tick(entity);
+			entity.TickNode(this, nodeStatus);
 			if(nodeStatus != NodeStatus.Running)
 			{
-				ExitNode(entity);
-				return nodeStatus;
-			}
-			nodeStatus = Tick(entity);
-			if(nodeStatus != NodeStatus.Running)
-			{
-				ExitNode(entity);
+				ExitNode(entity, nodeStatus);
 			}
 			return nodeStatus;
 		}
@@ -85,21 +130,26 @@ namespace BehaviourTreeSpace
 		/// Called at end of node processing
 		/// </summary>
 		/// <param name="entity">Entity.</param>
-		public virtual void ExitNode(TreeEntity entity)
+		public void ExitNode(TreeEntity entity, NodeStatus nodeStatus)
 		{
-			_initialised = false;
-			OnExitNode(entity);
+			entity.ExitNode(this, nodeStatus);
+			OnExitNode(entity, nodeStatus);
 		}
 
-		public virtual void OnExitNode(TreeEntity entity){}
+		public virtual void OnExitNode(TreeEntity entity, NodeStatus nodeStatus){}
+
+		public virtual NodeStatus Tick(TreeEntity entity)
+		{
+			return OnTick(entity);
+		}
 
 		/// <summary>
 		/// Tick the specified node with the supplied entity.
 		/// </summary>
 		/// <param name="entity">Entity.</param>
-		public virtual NodeStatus Tick(TreeEntity entity)
+		public virtual NodeStatus OnTick(TreeEntity entity)
 		{
-			return nodeStatus;
+			return NodeStatus.Running;
 		}
 	}
 }
